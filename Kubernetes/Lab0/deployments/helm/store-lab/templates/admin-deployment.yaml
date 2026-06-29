@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "store-lab.fullname" . }}-admin
+  labels:
+    {{- include "store-lab.labels" . | nindent 4 }}
+    app.kubernetes.io/component: admin
+spec:
+  replicas: {{ .Values.admin.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: admin
+  template:
+    metadata:
+      labels:
+        {{- include "store-lab.labels" . | nindent 8 }}
+        app.kubernetes.io/component: admin
+    spec:
+      containers:
+        - name: admin
+          image: {{ .Values.admin.image | quote }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.admin.port }}
+          env:
+            - name: NEXT_PUBLIC_API_BASE_URL
+              value: http://{{ include "store-lab.fullname" . }}-api
+          resources:
+            {{- toYaml .Values.admin.resources | nindent 12 }}
+

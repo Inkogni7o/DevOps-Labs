@@ -1,0 +1,2 @@
+"""Store lab backend application."""
+

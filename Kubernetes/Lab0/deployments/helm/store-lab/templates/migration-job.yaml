@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "store-lab.fullname" . }}-migrate
+  labels:
+    {{- include "store-lab.labels" . | nindent 4 }}
+    app.kubernetes.io/component: migration
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        {{- include "store-lab.labels" . | nindent 8 }}
+        app.kubernetes.io/component: migration
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: migrate
+          image: {{ .Values.api.image | quote }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          command: ["alembic", "upgrade", "head"]
+          envFrom:
+            - configMapRef:
+                name: {{ include "store-lab.fullname" . }}-config
+            - secretRef:
+                name: {{ .Values.secretRef.name }}
+          resources:
+            {{- toYaml .Values.api.resources | nindent 12 }}
+

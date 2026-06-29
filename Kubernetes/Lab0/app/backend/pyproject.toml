@@ -1,0 +1,43 @@
+[project]
+name = "store-lab-api"
+version = "0.1.0"
+description = "Online store API for Kubernetes labs"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  "alembic==1.14.0",
+  "asyncpg==0.30.0",
+  "bcrypt==4.2.1",
+  "celery[redis]==5.4.0",
+  "email-validator==2.2.0",
+  "fastapi==0.115.6",
+  "prometheus-client==0.21.1",
+  "psycopg[binary]==3.2.3",
+  "pydantic-settings==2.7.1",
+  "python-jose[cryptography]==3.3.0",
+  "python-json-logger==3.2.1",
+  "sqlalchemy[asyncio]==2.0.36",
+  "uvicorn[standard]==0.34.0"
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff==0.8.4"
+]
+
+[build-system]
+requires = ["setuptools==75.6.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
