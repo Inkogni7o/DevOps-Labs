@@ -1,5 +1,6 @@
 **Frontend**: React / Next.js  
 **Api**: Python FastAPI  
+**Load generator**: Go 1.23.4
 **DB**: PostgreSQL
 **Cache** / broker: Redis
 **Worker**: Celery 
@@ -22,6 +23,11 @@ Backend:
   Celery
   Redis
   PostgreSQL
+
+Load generator:
+  Go 1.23.4
+  Standard library HTTP client
+  Docker image: app-go-loader
 
 Frontend:
   Next.js / React

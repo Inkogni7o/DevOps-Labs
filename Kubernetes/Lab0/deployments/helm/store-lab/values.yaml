@@ -52,6 +52,25 @@ admin:
       cpu: 300m
       memory: 256Mi
 
+goLoader:
+  enabled: false
+  image: app-go-loader:0.1.0
+  replicas: 1
+  users: 10
+  orderPeriod: 1m
+  minDelay: 5s
+  maxDelay: 15s
+  maxProductsPerOrder: 3
+  userEmailDomain: load.example.com
+  userPasswordSecretKey: GO_LOADER_USER_PASSWORD
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 300m
+      memory: 128Mi
+
 config:
   appName: Store Lab API
   appVersion: 0.1.0
@@ -61,4 +80,3 @@ config:
 
 secretRef:
   name: store-lab-secrets
-
