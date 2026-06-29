@@ -1,7 +1,0 @@
-apiVersion: v2
-name: store-lab
-description: Online store application for Kubernetes labs
-type: application
-version: 0.1.0
-appVersion: "0.1.0"
-
