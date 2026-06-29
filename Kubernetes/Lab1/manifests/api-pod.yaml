@@ -1,0 +1,9 @@
+# Docs: https://kubernetes.io/docs/concepts/workloads/pods/
+apiVersion: v1
+kind: Pod
+metadata:
+  name:
+spec:
+  containers:
+  - name:
+    image:
